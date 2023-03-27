@@ -1,0 +1,45 @@
+<form class="mt-3 mb-3">
+  <div class="text-center">   
+  <label for="" class="my-3 mx-3">Filter By Team One | Team Two </label>
+  <input type="text" [(ngModel)]='val' [ngModelOptions]="{standalone: true}">
+  </div>
+ </form>
+<p>Here the value entered : {{val}}</p>
+<table class="table table-striped mt-3 mb-3">
+    <thead>
+      <tr>
+        
+        
+        <th scope="col">id</th>
+        <th scope="col">Score One</th>
+        <th scope="col">Score Two</th>
+        <th scope="col">Team One</th>
+        <th scope="col">Team Two</th>
+        <th scope="col">Actions</th>
+        
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let elt of matches | myFilter : val">
+
+        <td>{{elt._id}}</td>
+        <td>{{elt.scoreOne}}</td>
+        <td>{{elt.scoreTwo}}</td>
+        <td>{{elt.teamOne}}</td>
+        <td>{{elt.teamTwo}}</td>
+        <td>
+            <button type="button" class="btn btn-success" (click)="displayMatch(elt._id)">Display</button>
+            <button type="button" class="btn btn-warning" style="margin-left: 5px;" (click)="editMatch(elt._id)">Edit</button>
+            <button type="button" class="btn btn-danger" style="margin-left: 5px;" (click)="deleteMatch(elt._id)">Delete</button>
+        </td>
+
+      </tr>
+
+      
+
+      
+      
+    </tbody>
+</table>

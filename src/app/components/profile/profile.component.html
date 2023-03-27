@@ -1,0 +1,78 @@
+<div class="hero overlay" style="background-image: url('assets/images/bg_3.jpg');">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-9 mx-auto text-center">
+                <h1 class="text-white">Edit My profile</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+
+                <form #myProfileForm="ngForm">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="myProfile.firstName" [readonly]="true" name="firstName" class="form-control" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="myProfile.lastName" [readonly]="true" name="lastName" class="form-control" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text"  [(ngModel)]="myProfile.email" [readonly]="true" name="email" class="form-control" placeholder="Email">
+                    </div>
+                </form>
+
+                <form [formGroup]="editProfileForm">
+
+                    <div class="form-group">
+                        <input type="password" formControlName="oldPwd" class="form-control" placeholder="Old Password">
+                    </div>
+
+                    <div *ngIf="editProfileForm.controls['oldPwd'].invalid && editProfileForm.controls['oldPwd'].touched">
+
+                        <div *ngIf="editProfileForm.controls['oldPwd'].errors.required" style="color : red">
+                            Your Old Password is required
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" formControlName="newPwd" class="form-control" placeholder="New Password">
+                    </div>
+                    <div *ngIf="editProfileForm.controls['newPwd'].invalid && (
+                      editProfileForm.controls['newPwd'].touched ||
+                      editProfileForm.controls['newPwd'].dirty)">
+
+                        <div *ngIf="editProfileForm.controls['newPwd'].errors.required" style="color : red">
+                            Password is required
+                        </div>
+
+                        <div *ngIf="editProfileForm.controls['newPwd'].errors.minlength" style="color : red">
+                            Password must be at least 6 chars
+                        </div>
+
+                        <div *ngIf="editProfileForm.controls['newPwd'].errors.maxlength" style="color : red">
+                            Password must be at max 12 chars
+                        </div>
+
+                    </div>
+
+                    <div class="form-group" style="text-align: center;">
+                        <input type="submit" (click)="updateProfile()" [disabled]="editProfileForm.invalid"
+                            class="btn btn-primary py-3 px-5" value="Update">
+                    </div>
+
+                    <div style="color: red;">
+                        {{errMsg}}
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-5 px-5">
+                <img [src]="myProfile.avatar" alt="" style="width: 280px ; height: auto;">
+            </div>
+        </div>
+    </div>
+</div>
