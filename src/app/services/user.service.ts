@@ -34,6 +34,7 @@ export class UserService {
   }
 
 
+  // Login method
   login(obj) {
     this.httpClient.post<{ user: any, message: string }>(this.userUrl + "/signin", obj).subscribe(
       (res) => {
@@ -82,6 +83,7 @@ export class UserService {
     return this.httpClient.put<{ msg: string, typeResp: string }>(this.userUrl, newProfile);
   }
 
+  // Logout method
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('name');
